@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+class LoanCalculator
+{
+    void calculateEMI(int principal, int time, float rate)
+    {
+        float r = rate / (12 * 100);
+        int n = time * 12;
+
+        double emi = (principal * r * Math.pow(1 + r, n)) 
+                     / (Math.pow(1 + r, n) - 1);
+
+        System.out.println("Home Loan EMI = Rs. " + emi);
+    }
+
+    void calculateEMI(double principal, int time, double rate)
+    {
+        double r = rate / (12 * 100);
+        int n = time * 12;
+
+        double emi = (principal * r * Math.pow(1 + r, n)) 
+                     / (Math.pow(1 + r, n) - 1);
+
+        System.out.println("Vehicle Loan EMI = Rs. " + emi);
+    }
+
+    void calculateEMI(int principal, int time)
+    {
+        float rate = 10;
+        float r = rate / (12 * 100);
+        int n = time * 12;
+
+        double emi = (principal * r * Math.pow(1 + r, n)) 
+                     / (Math.pow(1 + r, n) - 1);
+
+        System.out.println("Personal Loan EMI (10%) = Rs. " + emi);
+    }
+}
+
+public class Pra7
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        LoanCalculator lc = new LoanCalculator();
+
+        System.out.println("Enter Home Loan Principal, Time (years), Rate:");
+        int p1 = sc.nextInt();
+        int t1 = sc.nextInt();
+        float r1 = sc.nextFloat();
+        lc.calculateEMI(p1, t1, r1);
+
+        System.out.println("\nEnter Vehicle Loan Principal, Time (years), Rate:");
+        double p2 = sc.nextDouble();
+        int t2 = sc.nextInt();
+        double r2 = sc.nextDouble();
+        lc.calculateEMI(p2, t2, r2);
+
+        System.out.println("\nEnter Personal Loan Principal and Time (years):");
+        int p3 = sc.nextInt();
+        int t3 = sc.nextInt();
+        lc.calculateEMI(p3, t3);
+
+        sc.close();
+    }
+}
