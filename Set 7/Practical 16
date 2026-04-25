@@ -1,0 +1,44 @@
+class SumThread extends Thread {
+    private int start;
+    private int end;
+    private long result;
+
+    SumThread(int s, int e) {
+        start = s;
+        end = e;
+    }
+
+    public void run() {
+        result = 0;
+        for (int i = start; i <= end; i++) {
+            result += i;
+        }
+        System.out.println("Sum from " + start + " to " + end + " = " + result);
+    }
+
+    public long getResult() {
+        return result;
+    }
+}
+
+public class Pra16{
+    public static void main(String[] args) {
+
+        SumThread t1 = new SumThread(1, 1000);
+        SumThread t2 = new SumThread(1001, 2000);
+
+        t1.start();
+        t2.start();
+
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+
+        long finalSum = t1.getResult() + t2.getResult();
+
+        System.out.println("\nFinal Total Sum = " + finalSum);
+    }
+}
