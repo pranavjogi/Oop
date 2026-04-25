@@ -1,0 +1,71 @@
+package apack;
+
+public class A {
+    public int publicValue;
+    protected int protectedValue;
+    private int privateValue;
+
+    public A(int x, int y, int z) {
+        publicValue = x;
+        protectedValue = y;
+        privateValue = z;
+    }
+
+    public int showPrivate() {
+        return privateValue;
+    }
+}
+
+package bpack;
+
+import apack.A;
+
+public class B extends A {
+
+    public B(int x, int y, int z) {
+        super(x, y, z);
+    }
+
+    public void showData() {
+        System.out.println("Class B Output (Using Inheritance)");
+
+        System.out.println("Public Value: " + publicValue);
+        System.out.println("Protected Value: " + protectedValue);
+
+        System.out.println("Private Value (using method): " + showPrivate());
+    }
+}
+
+package cpack;
+
+import apack.A;
+
+public class C {
+
+    public void showData() {
+        A a1 = new A(50, 60, 70);
+
+        System.out.println("\nClass C Output (Using Object)");
+
+        System.out.println("Public Value: " + a1.publicValue);
+
+        System.out.println("Private Value (using method): " + a1.showPrivate());
+    }
+}
+
+package dpack;
+
+import bpack.B;
+import cpack.C;
+
+public class ProtectedDemo {
+
+    public static void main(String[] args) {
+
+        B obj1 = new B(5, 10, 15);
+        C obj2 = new C();
+
+        obj1.showData();
+        obj2.showData();
+    }
+}
