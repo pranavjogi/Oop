@@ -1,0 +1,71 @@
+import java.util.Scanner;
+
+class BillGenerator
+{
+    void generateBill(int itemTotal)
+    {
+        System.out.println("Customer Type : Regular");
+        System.out.println("Total Bill Amount = Rs. " + itemTotal);
+    }
+
+    void generateBill(int itemTotal, int discount)
+    {
+        int finalAmount = itemTotal - discount;
+
+        System.out.println("Customer Type : Privileged");
+        System.out.println("Discount Applied = Rs. " + discount);
+        System.out.println("Final Bill Amount = Rs. " + finalAmount);
+    }
+
+    void generateBill(int itemTotal, double discountPercent)
+    {
+        double discount = (itemTotal * discountPercent) / 100;
+        double finalAmount = itemTotal - discount;
+
+        System.out.println("Customer Type : Festive Offer");
+        System.out.println("Discount = " + discountPercent + "%");
+        System.out.println("Final Bill Amount = Rs. " + finalAmount);
+    }
+}
+
+public class Pra7
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        BillGenerator bg = new BillGenerator();
+
+        System.out.println("Enter total amount of items:");
+        int total = sc.nextInt();
+
+        System.out.println("\nSelect Customer Type:");
+        System.out.println("1. Regular");
+        System.out.println("2. Privileged");
+        System.out.println("3. Festive Offer");
+
+        int choice = sc.nextInt();
+
+        if(choice == 1)
+        {
+            bg.generateBill(total);
+        }
+        else if(choice == 2)
+        {
+            System.out.println("Enter flat discount amount:");
+            int discount = sc.nextInt();
+            bg.generateBill(total, discount);
+        }
+        else if(choice == 3)
+        {
+            System.out.println("Enter discount percentage:");
+            double percent = sc.nextDouble();
+            bg.generateBill(total, percent);
+        }
+        else
+        {
+            System.out.println("Invalid Choice");
+        }
+
+        sc.close();
+    }
+}
