@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+interface Order {
+    void placeOrder(String item, int qty);
+    void cancelOrder(int orderId);
+    void generateBill();
+}
+
+abstract class PartialOrder implements Order {
+    String item;
+    int qty;
+    int orderId = 101;
+    int price = 100;
+
+    public void placeOrder(String item, int qty) {
+        this.item = item;
+        this.qty = qty;
+        System.out.println("Order placed successfully!");
+        System.out.println("Item: " + item + ", Quantity: " + qty);
+        System.out.println("Order ID: " + orderId);
+    }
+}
+
+class FinalOrder extends PartialOrder {
+
+    public void cancelOrder(int orderId) {
+        if (this.orderId == orderId) {
+            System.out.println("Order " + orderId + " has been cancelled.");
+        } else {
+            System.out.println("Invalid Order ID!");
+        }
+    }
+
+    public void generateBill() {
+        int total = qty * price;
+        System.out.println("\n----- BILL -----");
+        System.out.println("Item: " + item);
+        System.out.println("Quantity: " + qty);
+        System.out.println("Price per item: Rs." + price);
+        System.out.println("Total Amount: Rs." + total);
+    }
+}
+
+public class Pra12 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        FinalOrder order = new FinalOrder();
+
+        System.out.print("Enter item name: ");
+        String item = sc.nextLine();
+
+        System.out.print("Enter quantity: ");
+        int qty = sc.nextInt();
+
+        order.placeOrder(item, qty);
+
+        System.out.println("\n1. Generate Bill");
+        System.out.println("2. Cancel Order");
+        System.out.print("Enter your choice: ");
+        int choice = sc.nextInt();
+
+        if (choice == 1) {
+            order.generateBill();
+        } else if (choice == 2) {
+            System.out.print("Enter Order ID to cancel: ");
+            int id = sc.nextInt();
+            order.cancelOrder(id);
+        } else {
+            System.out.println("Invalid choice!");
+        }
+
+        sc.close();
+    }
+}
