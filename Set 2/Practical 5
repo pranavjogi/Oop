@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+class BankAccount {
+    String accountId;
+    String accountHolderName;
+    double balance;
+
+    void assignValues(String id, String name, double bal) {
+        accountId = id;
+        accountHolderName = name;
+        balance = bal;
+    }
+
+    void displayValues() {
+        System.out.println("Account ID: " + accountId);
+        System.out.println("Account Holder Name: " + accountHolderName);
+        System.out.println("Balance: " + balance);
+        System.out.println("-------------------------");
+    }
+}
+
+public class BankAccountDemo {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        BankAccount[] accounts = new BankAccount[5];
+
+        for (int i = 0; i < 5; i++) {
+            accounts[i] = new BankAccount();
+        }
+
+        accounts[0].assignValues("A101", "Rahul Sharma", 5000);
+        accounts[1].assignValues("A102", "Neha Patel", 8000);
+        accounts[2].assignValues("A103", "Amit Verma", 12000);
+        accounts[3].assignValues("A104", "Priya Singh", 7000);
+        accounts[4].assignValues("A105", "Karan Mehta", 15000);
+
+        System.out.println("All Bank Accounts:");
+        System.out.println("-------------------------");
+        for (int i = 0; i < 5; i++) {
+            accounts[i].displayValues();
+        }
+
+        System.out.print("Enter Account ID to search: ");
+        String searchId = sc.nextLine();
+
+        boolean found = false;
+
+        for (int i = 0; i < 5; i++) {
+            if (accounts[i].accountId.equals(searchId)) {
+                System.out.println("Account Found:");
+                System.out.println("-------------------------");
+                accounts[i].displayValues();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Account not found.");
+        }
+
+        sc.close();
+    }
+}
