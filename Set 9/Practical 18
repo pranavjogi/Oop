@@ -1,1 +1,33 @@
+import java.util.*;
 
+class Box<T> {
+    ArrayList<T> items = new ArrayList<>();
+
+    void addItem(T item) {
+        items.add(item);
+    }
+
+    void displayItems() {
+        for (T item : items) {
+            System.out.println(item);
+        }
+    }
+}
+
+public class pra18 {
+    public static void main(String[] args) {
+        Box<String> names = new Box<>();
+        names.addItem("Aman");
+        names.addItem("Rahul");
+
+        Box<Integer> rollNumbers = new Box<>();
+        rollNumbers.addItem(101);
+        rollNumbers.addItem(102);
+
+        System.out.println("Names:");
+        names.displayItems();
+
+        System.out.println("Roll Numbers:");
+        rollNumbers.displayItems();
+    }
+}
